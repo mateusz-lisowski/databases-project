@@ -45,7 +45,7 @@ CREATE TABLE Klienci (
 		CHECK (LEN(Email) <= 50 AND Email LIKE '%@%'),
 
 	Miasto NVARCHAR(50) 
-        CHECK (LEN(Miasto) >= 3 AND LEN(Imie) <= 50),
+        CHECK (LEN(Miasto) >= 3 AND LEN(Miasto) <= 50),
 
 	Kod_pocztowy NVARCHAR(6) 
         CHECK (LEN(Kod_pocztowy) = 6 AND Kod_pocztowy LIKE '__-___'),
@@ -74,7 +74,7 @@ CREATE TABLE Dokumenty_celne (
 	
 	ID_klienta UNIQUEIDENTIFIER REFERENCES Klienci(ID_klienta),
 
-	Nazwa_oplaty UNIQUEIDENTIFIER REFERENCES Oplaty(Nazwa_oplaty),
+	Nazwa_oplaty NVARCHAR(50) REFERENCES Oplaty(Nazwa_oplaty),
 
 	Data_wystawienia DATE DEFAULT GETDATE(),
 
@@ -103,7 +103,7 @@ CREATE TABLE Miesca_przejsc (
 	
 	ID_miejsca UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
 
-	Nazwa_miejsca NVARCHAR(50) PRIMARY KEY 
+	Nazwa_miejsca NVARCHAR(50)
 		CHECK (LEN(Nazwa_miejsca) >= 3 AND LEN(Nazwa_miejsca) <= 50),
 
 );
@@ -125,7 +125,7 @@ CREATE TABLE Stanowiska (
 -- Create table for custom officers
 CREATE TABLE Celnicy (
 	
-	PESEL NVARCHAR(11)
+	PESEL NVARCHAR(11) PRIMARY KEY
 		CHECK (PESEL NOT LIKE '%[^0-9]%'),
 
 	Nazwa_stanowiska NVARCHAR(50) REFERENCES Stanowiska(Nazwa_stanowiska),
