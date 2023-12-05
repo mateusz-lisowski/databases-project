@@ -166,7 +166,7 @@ CREATE TABLE Kontrole (
 
 	Data_kontroli DATE DEFAULT GETDATE(),
 
-	Status_kontroli BIT DEFAULT 0,
+	Status_kontroli BIT DEFAULT 1,
 
 	Uwagi NVARCHAR(200) 
         CHECK (LEN(Uwagi) >= 10 AND LEN(Uwagi) <= 200)
