@@ -86,11 +86,6 @@ CREATE TABLE Dokumenty_celne (
 
 	Status_deklaracji BIT DEFAULT 1,
 
-    CONSTRAINT Dokumenty_celne_CUU FOREIGN KEY (Nazwa_kategorii)
-        REFERENCES Kategorie_towarow(Nazwa_kategorii)
-        ON UPDATE CASCADE 
-        ON DELETE CASCADE
-
 );
 
 
@@ -137,7 +132,7 @@ CREATE TABLE Celnicy (
 	PESEL NVARCHAR(11) PRIMARY KEY
 		CHECK (PESEL NOT LIKE '%[^0-9]%'),
 
-	Nazwa_stanowiska NVARCHAR(50)
+	Nazwa_stanowiska NVARCHAR(50),
 
 	Imie_celnika NVARCHAR(50)
 		CHECK (LEN(Imie_celnika) >= 3 AND LEN(Imie_celnika) <= 50),
@@ -146,14 +141,14 @@ CREATE TABLE Celnicy (
 		CHECK (LEN(Nazwisko_celnika) >= 3 AND LEN(Nazwisko_celnika) <= 50),
 
     CONSTRAINT Celnicy_CUU FOREIGN KEY (Nazwa_stanowiska)
-        REFERENCES Stanowiska(Nazwa_stanowiska),
+        REFERENCES Stanowiska(Nazwa_stanowiska)
         ON UPDATE CASCADE 
         ON DELETE CASCADE
 
 );
 
 
--- Create table for border crosings
+-- Create table for border crossings
 CREATE TABLE Przejscia_graniczne (
 	
 	ID_przejscia UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
@@ -164,8 +159,11 @@ CREATE TABLE Przejscia_graniczne (
 
 	PESEL NVARCHAR(11) REFERENCES Celnicy(PESEL),
 
-	Data_przejscia DATE DEFAULT GETDATE()
-		CHECK (dbo.CheckDateGreaterThanInControl(Data_przejscia) = 1) 
+	Data_przejscia DATE DEFAULT GETDATE(),
+
+	CONSTRAINT Data_mniejsza
+		CHECK (dbo.CheckDateGreaterThanInControl(Numer_przesylki, Data_przejscia) = 1)
+		 
 );
 
 
