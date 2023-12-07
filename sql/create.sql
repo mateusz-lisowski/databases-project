@@ -96,9 +96,11 @@ CREATE TABLE Przesylki (
 
 	ID_towaru UNIQUEIDENTIFIER REFERENCES Towary(ID_towaru),
 
-	Numer_deklaracji UNIQUEIDENTIFIER REFERENCES Dokumenty_celne(Numer_deklaracji),
+	Numer_deklaracji UNIQUEIDENTIFIER REFERENCES Dokumenty_celne(Numer_deklaracji)
+		CHECK (dbo.CheckDocumentStatus(Numer_deklaracji) = 1),
 
 	Waga INT CHECK (Waga > 0),
+		
 );
 
 
@@ -153,7 +155,8 @@ CREATE TABLE Przejscia_graniczne (
 	
 	ID_przejscia UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
 
-	Numer_przesylki UNIQUEIDENTIFIER REFERENCES Przesylki(Numer_przesylki),
+	Numer_przesylki UNIQUEIDENTIFIER REFERENCES Przesylki(Numer_przesylki)
+		CHECK (dbo.CheckControlStatus(Numer_przesylki) = 1),
 
 	ID_miejsca UNIQUEIDENTIFIER REFERENCES Miesca_przejsc(ID_miejsca),
 
