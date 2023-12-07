@@ -10,6 +10,7 @@ VALUES
     ('Odzież', 'Kategoria zawierająca różne rodzaje odzieży.'),
     ('AGD', 'Kategoria sprzętu AGD, takiego jak lodówki, pralki, odkurzacze.'),
     ('Książki', 'Kategoria zawierająca różne gatunki książek.'),
+    ('Pusta', 'Kategoria do usunięcia.'),
     ('Sport', 'Kategoria obejmująca produkty sportowe.');
 
 
