@@ -21,12 +21,12 @@ SELECT * FROM Celnicy ORDER BY Nazwa_stanowiska;
 
 
 -- Deleting inspector position
-DELETE FROM Celnicy
+DELETE FROM Stanowiska
 WHERE Nazwa_stanowiska = 'Inspektor celny';
 
 
 -- Deleting advisor position
-DELETE FROM Celnicy
+DELETE FROM Stanowiska
 WHERE Nazwa_stanowiska = 'Doradca celny starszy';
 
 
