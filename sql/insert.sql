@@ -95,6 +95,14 @@ VALUES
     ('cd0a07f6-2944-4ff8-88fb-347bcb9d9a0b', 'ae6a1a30-1f68-4e27-b5b3-053d47822497', 'PCC', 913452);
 
 
+-- Inserting values with unchecked status to payments' documents table
+INSERT INTO Dokumenty_celne (Numer_deklaracji, ID_klienta, Nazwa_oplaty, Kwota_cla, Status_deklaracji) 
+VALUES 
+    ('816f650b-c3bd-4d19-89f1-5c4bf2a7eeb7', '12c2af47-3a63-4098-baea-80abee34b549', 'OC przegląd', 69623, 0),
+    ('ad9c7681-1054-45d0-92fd-56ee524d6898', 'ae6a1a30-1f68-4e27-b5b3-053d47822497', 'PCC', 6123, 0),
+    ('a0bd832e-05ad-470b-8ddb-4f16a876ebec', '2c8a1815-2f69-4a95-9e66-3407ddb2c29e', 'CIT-32', 6623, 0);
+
+
 -- Inserting values to packages table
 INSERT INTO Przesylki (Numer_przesylki, ID_towaru, Numer_deklaracji, Waga)
 VALUES
@@ -119,6 +127,8 @@ VALUES
     ('75640b7e-a495-4e3c-9c9a-fd988f8ff273', 'bd1a265c-3fe8-41e0-81b2-6039ac2c3e54', 'f1de14b3-7d3c-4ae0-9cda-469a82c8e95a', 65139),
     ('4af50f43-53f3-4186-bc50-7331b7953834', '5b69e49d-58a1-4e14-80e2-d524d9539f08', 'e3bba12d-4120-46ee-b9e0-8c03ba7bd44a', 6139),
     ('59263988-a9bd-4d02-ada1-019dc62a4ab5', '43ee2287-1ac6-4bda-b43c-9e215218f0e3', 'cce666ca-9c47-42e7-b485-fb9be7b30a1d', 6139),
+    ('7208c35c-9a5d-4ba7-a71d-a039448f33e6', '43ee2287-1ac6-4bda-b43c-9e215218f0e3', 'cce666ca-9c47-42e7-b485-fb9be7b30a1d', 813901),
+    ('0836edaa-6d7c-402c-a2ea-6610b4d830f2', '43ee2287-1ac6-4bda-b43c-9e215218f0e3', 'cce666ca-9c47-42e7-b485-fb9be7b30a1d', 613902),
     ('5c652482-2969-434d-9cb3-82a34e28830d', '5b69e49d-58a1-4e14-80e2-d524d9539f08', 'cd0a07f6-2944-4ff8-88fb-347bcb9d9a0b', 73221);
 
 -- Inserting values to places table
@@ -229,3 +239,10 @@ VALUES
     ('70050556789', '4af50f43-53f3-4186-bc50-7331b7953834', 'Kontrola przebiegła pomyślnie'),
     ('92010190123', '59263988-a9bd-4d02-ada1-019dc62a4ab5', 'Kontrola przebiegła pomyślnie'),
     ('73060656789', '5c652482-2969-434d-9cb3-82a34e28830d', 'Kontrola przebiegła pomyślnie');
+
+
+-- Insert values with controls which did not passed to controls table
+INSERT INTO Kontrole (PESEL, Numer_przesylki, Status_kontroli, Uwagi) 
+VALUES
+    ('70050556789', '7208c35c-9a5d-4ba7-a71d-a039448f33e6', 0, 'Kontrola wykazała nieprawidłowaości'),
+    ('73060656789', '0836edaa-6d7c-402c-a2ea-6610b4d830f2', 0, 'Kontrola wykazała nieprawidłowaości');
