@@ -76,9 +76,9 @@ CREATE TABLE Dokumenty_celne (
 	
 	Numer_deklaracji UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
 	
-	ID_klienta UNIQUEIDENTIFIER REFERENCES Klienci(ID_klienta),
+	ID_klienta UNIQUEIDENTIFIER REFERENCES Klienci(ID_klienta) NOT NULL,
 
-	Nazwa_oplaty NVARCHAR(50) REFERENCES Oplaty(Nazwa_oplaty),
+	Nazwa_oplaty NVARCHAR(50) REFERENCES Oplaty(Nazwa_oplaty) NOT NULL,
 
 	Data_wystawienia DATE DEFAULT GETDATE(),
 
@@ -158,7 +158,7 @@ CREATE TABLE Przejscia_graniczne (
 	Numer_przesylki UNIQUEIDENTIFIER REFERENCES Przesylki(Numer_przesylki)
 		CHECK (dbo.CheckControlStatus(Numer_przesylki) = 1),
 
-	ID_miejsca UNIQUEIDENTIFIER REFERENCES Miesca_przejsc(ID_miejsca),
+	ID_miejsca UNIQUEIDENTIFIER REFERENCES Miesca_przejsc(ID_miejsca) NOT NULL,
 
 	PESEL NVARCHAR(11) REFERENCES Celnicy(PESEL),
 
@@ -177,7 +177,7 @@ CREATE TABLE Kontrole (
 
 	PESEL NVARCHAR(11) REFERENCES Celnicy(PESEL),
 
-	Numer_przesylki UNIQUEIDENTIFIER REFERENCES Przesylki(Numer_przesylki),
+	Numer_przesylki UNIQUEIDENTIFIER REFERENCES Przesylki(Numer_przesylki) NOT NULL,
 
 	Data_kontroli DATE DEFAULT GETDATE(),
 
