@@ -123,7 +123,7 @@ CREATE TABLE Stanowiska (
 
 	Wynagrodzenie INT CHECK (Wynagrodzenie > 0),
 
-	Ilosc_godzin_pracy INT CHECK (Ilosc_godzin_pracy <= 16 AND Ilosc_godzin_pracy >= 0),
+	Ilosc_godzin_pracy INT CHECK (Ilosc_godzin_pracy <= 16 AND Ilosc_godzin_pracy >= 2),
 	
 );
 
