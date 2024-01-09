@@ -1,4 +1,5 @@
 -- Ile towarów z danej kategori przeszło przez granice w ciągu ostatniego roku
+-- SCENARIUSZ
 
 SELECT T.Nazwa_kategorii, COUNT(*)
 FROM Towary T
@@ -9,6 +10,7 @@ GROUP BY T.Nazwa_kategorii;
 
 
 -- Ile kontroli przeprowadził każdy z celników
+-- SCENARIUSZ
 
 SELECT C.PESEL, C.Imie_celnika, C.Nazwisko_celnika, COUNT(K.ID_kontroli) AS Ilosc_kontroli
 FROM Celnicy C
@@ -18,6 +20,7 @@ ORDER BY Ilosc_kontroli DESC
 
 
 -- Ile przesyłek przeszło przez każde z przejść granicznych
+-- SCENARIUSZ
 
 SELECT MP.ID_miejsca, MP.Nazwa_miejsca, 
     (SELECT COUNT(PG.Numer_przesylki) 
@@ -28,6 +31,7 @@ ORDER BY Ilosc_przesylek DESC
 
 
 -- Jaki jest stosunek kontroli zatwierdzonych do wszystkich przeprowadzonych przez danego celnika
+-- SCENARIUSZ
 
 SELECT C.PESEL, C.Imie_celnika, C.Nazwisko_celnika, 
     SUM(CAST(K.Status_kontroli AS INT)) AS Zatwierdzone,
@@ -44,6 +48,7 @@ ORDER BY Stosunek DESC
 
 
 -- Jaka jest średnia waga przesyłek z danych katagorii towarów
+-- SCENARIUSZ
 
 SELECT KT.Nazwa_kategorii, AVG(P.Waga) AS Srednia_waga_przesylki
 FROM Kategorie_towarow KT
@@ -53,6 +58,7 @@ GROUP BY KT.Nazwa_kategorii
 
 
 -- Zestawienie klientów którzy dokonali najwięcej zakupów
+-- SCENARIUSZ
 
 -- Stworzenie widoku
 CREATE VIEW Klienci_Najwiecej_Przesylek AS
@@ -72,6 +78,7 @@ WHERE Liczba_przesylek = (
 
 
 -- Zestawienie wszystkich towarów którch nazwa zaczyna się na literę 'S'
+-- SCENARIUSZ
 
 SELECT *
 FROM Towary
