@@ -18,3 +18,9 @@ Execute scripts in the following order for not to make any mistakes:
 - delete.sql
 - drop.sql
 - drop_database.sql
+
+## Connecting database container to Sql Server Management Studio
+
+- run docker container
+- run Sql Server Management Studio
+- log in with password used during container creation
