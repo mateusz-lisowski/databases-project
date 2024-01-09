@@ -83,3 +83,14 @@ WHERE Liczba_przesylek = (
 SELECT *
 FROM Towary
 WHERE Nazwa_towaru LIKE 'S%';
+
+
+-- Zestawienie trzech klientów którzy zapłacili najwięcej za wystawienie dokumentówc celnych
+-- SCENARIUSZ
+
+SELECT TOP 3 K.ID_klienta, K.Imie, K.Nazwisko, SUM(O.Kwota_oplaty) AS Suma_oplaty
+FROM Klienci K
+JOIN Dokumenty_celne DC ON K.ID_klienta = DC.ID_klienta
+JOIN Oplaty O ON DC.Nazwa_oplaty = O.Nazwa_oplaty
+GROUP BY K.ID_klienta, K.Imie, K.Nazwisko
+ORDER BY SUM(O.Kwota_oplaty) DESC;
