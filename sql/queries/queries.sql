@@ -1,4 +1,4 @@
---  Ile towarów z danej kategori przeszło przez granice w ciągu ostatniego roku
+-- Ile towarów z danej kategori przeszło przez granice w ciągu ostatniego roku
 
 SELECT T.Nazwa_kategorii, COUNT(*)
 FROM Towary T
@@ -69,3 +69,10 @@ WHERE Liczba_przesylek = (
     SELECT MAX(Liczba_przesylek)
     FROM Klienci_Najwiecej_Przesylek
 )
+
+
+-- Zestawienie wszystkich towarów którch nazwa zaczyna się na literę 'S'
+
+SELECT *
+FROM Towary
+WHERE Nazwa_towaru LIKE 'S%';
