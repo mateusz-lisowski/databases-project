@@ -50,3 +50,22 @@ FROM Kategorie_towarow KT
 INNER JOIN Towary T ON KT.Nazwa_kategorii = T.Nazwa_kategorii
 INNER JOIN Przesylki P ON T.ID_towaru = P.ID_towaru
 GROUP BY KT.Nazwa_kategorii
+
+
+-- Zestawienie klientów którzy dokonali najwięcej zakupów
+
+-- Stworzenie widoku
+CREATE VIEW Klienci_Najwiecej_Przesylek AS
+SELECT K.ID_klienta, K.Imie, K.Nazwisko, COUNT(P.Numer_przesylki) AS Liczba_przesylek
+FROM Klienci K
+LEFT JOIN Dokumenty_celne D ON K.ID_klienta = D.ID_klienta
+LEFT JOIN Przesylki P ON D.Numer_deklaracji = P.Numer_deklaracji
+GROUP BY K.ID_klienta, K.Imie, K.Nazwisko;
+
+-- Zapytanie korzystające z widoku
+SELECT ID_klienta, Imie, Nazwisko, Liczba_przesylek
+FROM Klienci_Najwiecej_Przesylek
+WHERE Liczba_przesylek = (
+    SELECT MAX(Liczba_przesylek)
+    FROM Klienci_Najwiecej_Przesylek
+)
