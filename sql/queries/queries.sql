@@ -1,4 +1,4 @@
---  Ile towarów z danej kategori przeszło przez granice w ciągu ostatniego roku. 
+--  Ile towarów z danej kategori przeszło przez granice w ciągu ostatniego roku
 
 SELECT T.Nazwa_kategorii, COUNT(*)
 FROM Towary T
@@ -28,6 +28,7 @@ ORDER BY Ilosc_przesylek DESC
 
 
 -- Jaki jest stosunek kontroli zatwierdzonych do wszystkich przeprowadzonych przez danego celnika
+
 SELECT C.PESEL, C.Imie_celnika, C.Nazwisko_celnika, 
     SUM(CAST(K.Status_kontroli AS INT)) AS Zatwierdzone,
     COUNT(K.ID_kontroli) AS Wszystkie,
@@ -40,3 +41,12 @@ HAVING SUM(CAST(K.Status_kontroli AS FLOAT)) / COUNT(K.ID_kontroli) > (
     FROM Kontrole K2
 )
 ORDER BY Stosunek DESC
+
+
+-- Jaka jest średnia waga przesyłek z danych katagorii towarów
+
+SELECT KT.Nazwa_kategorii, AVG(P.Waga) AS Srednia_waga_przesylki
+FROM Kategorie_towarow KT
+INNER JOIN Towary T ON KT.Nazwa_kategorii = T.Nazwa_kategorii
+INNER JOIN Przesylki P ON T.ID_towaru = P.ID_towaru
+GROUP BY KT.Nazwa_kategorii
