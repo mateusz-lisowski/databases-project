@@ -25,3 +25,18 @@ SELECT MP.ID_miejsca, MP.Nazwa_miejsca,
     WHERE PG.ID_miejsca = MP.ID_miejsca) AS Ilosc_przesylek
 FROM Miesca_przejsc MP
 ORDER BY Ilosc_przesylek DESC
+
+
+-- Jaki jest stosunek kontroli zatwierdzonych do wszystkich przeprowadzonych przez danego celnika
+SELECT C.PESEL, C.Imie_celnika, C.Nazwisko_celnika, 
+    SUM(CAST(K.Status_kontroli AS INT)) AS Zatwierdzone,
+    COUNT(K.ID_kontroli) AS Wszystkie,
+    SUM(CAST(K.Status_kontroli AS FLOAT)) / COUNT(K.ID_kontroli) AS Stosunek
+FROM Celnicy C
+LEFT JOIN Kontrole K ON C.PESEL = K.PESEL
+GROUP BY C.PESEL, C.Imie_celnika, C.Nazwisko_celnika
+HAVING SUM(CAST(K.Status_kontroli AS FLOAT)) / COUNT(K.ID_kontroli) > (
+    SELECT AVG(CAST(K2.Status_kontroli AS FLOAT)) / COUNT(K2.ID_kontroli)
+    FROM Kontrole K2
+)
+ORDER BY Stosunek DESC
