@@ -1,5 +1,5 @@
 -- Ile towarów z danej kategori przeszło przez granice w ciągu ostatniego roku
--- Komendant potrzebuje informacji o tym towary z jakiej kategorii są najczęściej transportowane przez granicę w celu odpowiedniego dostosowania opłat.
+-- Komendant potrzebuje informacji o tym jakie kategorie towarów są najczęściej transportowane przez granicę w celu odpowiedniego dostosowania opłat.
 
 SELECT T.Nazwa_kategorii, COUNT(*)
 FROM Towary T
@@ -10,7 +10,7 @@ GROUP BY T.Nazwa_kategorii;
 
 
 -- Ile kontroli przeprowadził każdy z celników
--- SCENARIUSZ
+-- Kon
 
 SELECT C.PESEL, C.Imie_celnika, C.Nazwisko_celnika, COUNT(K.ID_kontroli) AS Ilosc_kontroli
 FROM Celnicy C
