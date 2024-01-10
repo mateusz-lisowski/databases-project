@@ -10,7 +10,7 @@ GROUP BY T.Nazwa_kategorii;
 
 
 -- Ile kontroli przeprowadził każdy z celników
--- Kon
+-- Komendant porztebuje zestawienia kontroli wykonanych przez każdego celnika w celu ustalenia wysokości premii noworocznej dla każdego z nich.
 
 SELECT C.PESEL, C.Imie_celnika, C.Nazwisko_celnika, COUNT(K.ID_kontroli) AS Ilosc_kontroli
 FROM Celnicy C
