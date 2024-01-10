@@ -31,7 +31,8 @@ ORDER BY Ilosc_przesylek DESC
 
 
 -- Jaki jest stosunek kontroli zatwierdzonych do wszystkich przeprowadzonych przez danego celnika
--- SCENARIUSZ
+-- Komendant jest zobowiązany przeprowadzić audyt zlecony mu przez CBA. 
+-- W tym celu chce znaleźć celników, którzy mają niską średnią skuteczność kontroli w porównaniu do całej reszty.
 
 SELECT C.PESEL, C.Imie_celnika, C.Nazwisko_celnika, 
     SUM(CAST(K.Status_kontroli AS INT)) AS Zatwierdzone,
