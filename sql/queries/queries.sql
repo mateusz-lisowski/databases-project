@@ -1,5 +1,5 @@
 -- Ile towarów z danej kategori przeszło przez granice w ciągu ostatniego roku
--- SCENARIUSZ
+-- Komendant potrzebuje informacji o tym towary z jakiej kategorii są najczęściej transportowane przez granicę w celu odpowiedniego dostosowania opłat.
 
 SELECT T.Nazwa_kategorii, COUNT(*)
 FROM Towary T
