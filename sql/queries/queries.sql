@@ -81,7 +81,7 @@ WHERE Liczba_przesylek = (
 
 
 -- Zestawienie trzech klientów którzy zapłacili najwięcej za wystawienie dokumentówc celnych
--- SCENARIUSZ
+-- Komendant chce nagrodzić zniżką na przyszłe zamówienia tych trzech klientów, którzy dokonali opłat na największą sumę.
 
 SELECT TOP 3 K.ID_klienta, K.Imie, K.Nazwisko, SUM(O.Kwota_oplaty) AS Suma_oplaty
 FROM Klienci K
