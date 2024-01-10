@@ -80,14 +80,6 @@ WHERE Liczba_przesylek = (
 )
 
 
--- Zestawienie wszystkich towarów którch nazwa zaczyna się na literę 'S'
--- SCENARIUSZ
-
-SELECT *
-FROM Towary
-WHERE Nazwa_towaru LIKE 'S%';
-
-
 -- Zestawienie trzech klientów którzy zapłacili najwięcej za wystawienie dokumentówc celnych
 -- SCENARIUSZ
 
