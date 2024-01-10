@@ -30,7 +30,7 @@ FROM Miesca_przejsc MP
 ORDER BY Ilosc_przesylek DESC
 
 
--- Jaki jest stosunek kontroli zatwierdzonych do wszystkich przeprowadzonych przez danego celnika
+-- Jaki jest stosunek kontroli zatwierdzonych do wszystkich przeprowadzonych przez danego celnika?
 -- Komendant jest zobowiązany przeprowadzić audyt zlecony mu przez CBA. 
 -- W tym celu chce znaleźć celników, którzy mają niską średnią skuteczność kontroli w porównaniu do całej reszty.
 
@@ -48,8 +48,9 @@ HAVING SUM(CAST(K.Status_kontroli AS FLOAT)) / COUNT(K.ID_kontroli) > (
 ORDER BY Stosunek DESC
 
 
--- Jaka jest średnia waga przesyłek z danych katagorii towarów
--- Komendant musi ustalić nowe limity wagaowe dla każdej kategorii, tak aby dla towaru z każdej kategorii znalazło się odpowiednio dużo miejsca w magazynie.
+-- Jaka jest średnia waga przesyłek z danych katagorii towarów?
+-- Komendant musi ustalić nowe limity wagaowe dla każdej kategorii tak,
+-- aby dla towaru z każdej kategorii znalazło się odpowiednio dużo miejsca w magazynie.
 
 SELECT KT.Nazwa_kategorii, AVG(P.Waga) AS Srednia_waga_przesylki
 FROM Kategorie_towarow KT
@@ -58,8 +59,9 @@ INNER JOIN Przesylki P ON T.ID_towaru = P.ID_towaru
 GROUP BY KT.Nazwa_kategorii
 
 
--- Zestawienie klientów którzy dokonali najwięcej zakupów
--- SCENARIUSZ
+-- Którzy klienci nadali w sumie najwięcej przesyłek?
+-- Komendant chce przeprowadzić ankietę zadowolenia wśro klientów komory.
+-- W tym celu chce się dowiedzieć który klient/którzy klienci nadali w sumie najwięcej przesyłek.
 
 -- Stworzenie widoku
 CREATE VIEW Klienci_Najwiecej_Przesylek AS
