@@ -49,7 +49,7 @@ ORDER BY Stosunek DESC
 
 
 -- Jaka jest średnia waga przesyłek z danych katagorii towarów
--- SCENARIUSZ
+-- Komendant musi ustalić nowe limity wagaowe dla każdej kategorii, tak aby dla towaru z każdej kategorii znalazło się odpowiednio dużo miejsca w magazynie.
 
 SELECT KT.Nazwa_kategorii, AVG(P.Waga) AS Srednia_waga_przesylki
 FROM Kategorie_towarow KT
