@@ -1,4 +1,4 @@
--- Ile towarów z danej kategori przeszło przez granice w ciągu ostatniego roku
+-- Ile towarów z danej kategori przeszło przez granice w ciągu ostatniego roku?
 -- Komendant potrzebuje informacji o tym jakie kategorie towarów są najczęściej transportowane przez granicę w celu odpowiedniego dostosowania opłat.
 
 SELECT T.Nazwa_kategorii, COUNT(*)
@@ -9,7 +9,7 @@ WHERE PG.Data_przejscia >= DATEADD(YEAR, -1, GETDATE())
 GROUP BY T.Nazwa_kategorii;
 
 
--- Ile kontroli przeprowadził każdy z celników
+-- Ile kontroli przeprowadził każdy z celników?
 -- Komendant porztebuje zestawienia kontroli wykonanych przez każdego celnika w celu ustalenia wysokości premii noworocznej dla każdego z nich.
 
 SELECT C.PESEL, C.Imie_celnika, C.Nazwisko_celnika, COUNT(K.ID_kontroli) AS Ilosc_kontroli
@@ -19,8 +19,8 @@ GROUP BY C.PESEL, C.Imie_celnika, C.Nazwisko_celnika
 ORDER BY Ilosc_kontroli DESC
 
 
--- Ile przesyłek przeszło przez każde z przejść granicznych
--- SCENARIUSZ
+-- Ile przesyłek przeszło przez każde z przejść granicznych?
+-- Komendant chce dowiedzieć się, które z przejść granicznych są najbardziej oblegane, by móc skierować tam dodatkowych celników.
 
 SELECT MP.ID_miejsca, MP.Nazwa_miejsca, 
     (SELECT COUNT(PG.Numer_przesylki) 
