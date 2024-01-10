@@ -1,4 +1,4 @@
--- Ile towarów z danej kategori przeszło przez granice w ciągu ostatniego roku?
+-- Ile towarów z danej kategorii przeszło przez granice w ciągu ostatniego roku?
 -- Komendant potrzebuje informacji o tym jakie kategorie towarów są najczęściej transportowane przez granicę w celu odpowiedniego dostosowania opłat.
 
 SELECT T.Nazwa_kategorii, COUNT(*)
@@ -10,7 +10,7 @@ GROUP BY T.Nazwa_kategorii;
 
 
 -- Ile kontroli przeprowadził każdy z celników?
--- Komendant porztebuje zestawienia kontroli wykonanych przez każdego celnika w celu ustalenia wysokości premii noworocznej dla każdego z nich.
+-- Komendant potrzebuje zestawienia kontroli wykonanych przez każdego celnika w celu ustalenia wysokości premii noworocznej dla każdego z nich.
 
 SELECT C.PESEL, C.Imie_celnika, C.Nazwisko_celnika, COUNT(K.ID_kontroli) AS Ilosc_kontroli
 FROM Celnicy C
@@ -30,7 +30,7 @@ FROM Miesca_przejsc MP
 ORDER BY Ilosc_przesylek DESC
 
 
--- Jaki jest stosunek kontroli zatwierdzonych do wszystkich przeprowadzonych przez danego celnika?
+-- Jaki jest stosunek kontroli zatwierdzonych do wszystkich przeprowadzonych przez danego celnika i czy jest mniejszy od średniej?
 -- Komendant jest zobowiązany przeprowadzić audyt zlecony mu przez CBA. 
 -- W tym celu chce znaleźć celników, którzy mają niską średnią skuteczność kontroli w porównaniu do całej reszty.
 
@@ -41,15 +41,15 @@ SELECT C.PESEL, C.Imie_celnika, C.Nazwisko_celnika,
 FROM Celnicy C
 LEFT JOIN Kontrole K ON C.PESEL = K.PESEL
 GROUP BY C.PESEL, C.Imie_celnika, C.Nazwisko_celnika
-HAVING SUM(CAST(K.Status_kontroli AS FLOAT)) / COUNT(K.ID_kontroli) > (
-    SELECT AVG(CAST(K2.Status_kontroli AS FLOAT)) / COUNT(K2.ID_kontroli)
+HAVING SUM(CAST(K.Status_kontroli AS FLOAT)) / COUNT(K.ID_kontroli) < (
+    SELECT AVG(CAST(K2.Status_kontroli AS FLOAT))
     FROM Kontrole K2
 )
 ORDER BY Stosunek DESC
 
 
--- Jaka jest średnia waga przesyłek z danych katagorii towarów?
--- Komendant musi ustalić nowe limity wagaowe dla każdej kategorii tak,
+-- Jaka jest średnia waga przesyłek z danych kategorii towarów?
+-- Komendant musi ustalić nowe limity wagowe dla każdej kategorii tak,
 -- aby dla towaru z każdej kategorii znalazło się odpowiednio dużo miejsca w magazynie.
 
 SELECT KT.Nazwa_kategorii, AVG(P.Waga) AS Srednia_waga_przesylki
@@ -60,7 +60,8 @@ GROUP BY KT.Nazwa_kategorii
 
 
 -- Którzy klienci nadali w sumie najwięcej przesyłek?
--- Komendant chce przeprowadzić ankietę zadowolenia wśro klientów komory.
+-- Komendant chce przeprowadzić ankietę zadowolenia wśród klientów komory. 
+-- Niestety z braku zasobów ludzkich i czasowych musi znaleźć najaktywniejszych klientów.
 -- W tym celu chce się dowiedzieć który klient/którzy klienci nadali w sumie najwięcej przesyłek.
 
 -- Stworzenie widoku
@@ -80,7 +81,7 @@ WHERE Liczba_przesylek = (
 )
 
 
--- Zestawienie trzech klientów którzy zapłacili najwięcej za wystawienie dokumentówc celnych
+-- Jakich trzech klientów zapłaciło w sumie najwięcej za wystawienie dokumentów celnych?
 -- Komendant chce nagrodzić zniżką na przyszłe zamówienia tych trzech klientów, którzy dokonali opłat na największą sumę.
 
 SELECT TOP 3 K.ID_klienta, K.Imie, K.Nazwisko, SUM(O.Kwota_oplaty) AS Suma_oplaty
